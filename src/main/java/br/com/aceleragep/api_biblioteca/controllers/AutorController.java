@@ -2,6 +2,8 @@ package br.com.aceleragep.api_biblioteca.controllers;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +44,7 @@ public class AutorController {
 	public Page<AutorOutput> listarTodos(
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 		Page<AutorEntity> autoresEncontrados = autorService.listarTodos(paginacao);
-		return autorConvert.ListEntityToListOutput(autoresEncontrados);
+		return autorConvert.pageEntityParaPageOutput(autoresEncontrados);
 	}
 
 	// FindAllById
@@ -50,13 +52,13 @@ public class AutorController {
 	public AutorOutput buscarPorId(@PathVariable Long autorId) {
 		System.out.println("Buscar");
 		AutorEntity autoresEncontrados = autorService.buscarPeloId(autorId);
-		return autorConvert.entityToOutput(autoresEncontrados);
+		return autorConvert.entityParaOutput(autoresEncontrados);
 	}
 
 	// Post
 	@PostMapping("cadastar")
-	public ResponseEntity<AutorEntity> cadastrar(@RequestBody AutorInput autorInput, UriComponentsBuilder uriBuild) {
-		AutorEntity autorNovo = autorConvert.inputToEntity(autorInput);
+	public ResponseEntity<AutorEntity> cadastrar(@Valid @RequestBody AutorInput autorInput, UriComponentsBuilder uriBuild) {
+		AutorEntity autorNovo = autorConvert.inputParaEntity(autorInput);
 		AutorEntity autorSalvo = autorService.cadastrar(autorNovo);
 
 		URI uri = uriBuild.path(ControllerConfig.PRE_URL + "autores/{id}").buildAndExpand(autorSalvo.getId()).toUri();
@@ -73,10 +75,10 @@ public class AutorController {
 
 	// Put
 	@PutMapping("atualizar/{autorId}")
-	public AutorOutput atualizar(@PathVariable Long autorId, @RequestBody AutorInput autorInput) {
+	public AutorOutput atualizar(@PathVariable Long autorId, @Valid @RequestBody AutorInput autorInput) {
 		AutorEntity autorEncontrado = autorService.buscarPeloId(autorId);
 		autorConvert.copyInputToEntity(autorEncontrado, autorInput);
 		AutorEntity autorSalvo = autorService.atualizar(autorEncontrado);
-		return autorConvert.entityToOutput(autorSalvo);
+		return autorConvert.entityParaOutput(autorSalvo);
 	}
 }

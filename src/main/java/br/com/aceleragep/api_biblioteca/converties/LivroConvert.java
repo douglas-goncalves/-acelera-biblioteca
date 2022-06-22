@@ -18,25 +18,23 @@ public class LivroConvert {
 	@Autowired
 	AutorConvert autorConvert;
 
-
-
-	public LivroEntity inputToEntity(LivroInput livroInput) {
-		LivroEntity livro = modelMapper.map(livroInput, LivroEntity.class);
-		livro.setAutores(autorConvert.longToEntity(livroInput.getAutores()));
-		return livro;
+	public LivroEntity inputParaEntity(LivroInput livroInput) {
+		LivroEntity livroEntity = modelMapper.map(livroInput, LivroEntity.class);
+		livroEntity.setAutores(autorConvert.longParaEntity(livroInput.getAutores()));
+		return livroEntity;
 	}
 
-	public LivroOutput entityToOutput(LivroEntity livrosEncontrado) {
+	public LivroOutput entityParaOutput(LivroEntity livrosEncontrado) {
 		return modelMapper.map(livrosEncontrado, LivroOutput.class);
 	}
 
-	public void copyInputToEntity(LivroEntity livroEncontrado, LivroInput livroInput) {
+	public void copyInputParaEntity(LivroEntity livroEncontrado, LivroInput livroInput) {
 		modelMapper.map(livroInput, livroEncontrado);
-		livroEncontrado.setAutores(autorConvert.longToEntity(livroInput.getAutores()));
+		livroEncontrado.setAutores(autorConvert.longParaEntity(livroInput.getAutores()));
 	}
 
-	public Page<LivroOutput> ListEntityToListOutput(Page<LivroEntity> livrosEncontrados) {
-		return livrosEncontrados.map(this::entityToOutput);
+	public Page<LivroOutput> pageEntityParaPageOutput(Page<LivroEntity> livrosEncontrados) {
+		return livrosEncontrados.map(this::entityParaOutput);
 	}
 
 }

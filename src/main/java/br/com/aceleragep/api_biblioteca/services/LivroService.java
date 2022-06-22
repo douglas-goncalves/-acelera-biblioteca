@@ -11,8 +11,7 @@ import br.com.aceleragep.api_biblioteca.repositories.LivroRepository;
 @Service
 public class LivroService {
 
-	@Autowired
-	LivroRepository livroRepository;
+	@Autowired LivroRepository livroRepository;
 
 	public Page<LivroEntity> listarTodos(Pageable paginacao) {
 		return livroRepository.findAll(paginacao);
@@ -33,4 +32,10 @@ public class LivroService {
 	public LivroEntity atualizar(LivroEntity livroEncontrado) {
 		return livroRepository.save(livroEncontrado);
 	}
+
+	public Page<LivroEntity> listarLivrosPeloIdAutor(Long autorId, Pageable paginacao) {
+		return livroRepository.findAllByAutoresId(autorId, paginacao);
+	}
+
+
 }

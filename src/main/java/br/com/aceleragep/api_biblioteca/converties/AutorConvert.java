@@ -22,11 +22,11 @@ public class AutorConvert {
 	@Autowired
 	AutorService autorService;
 
-	public AutorEntity inputToEntity(AutorInput autorInput) {
+	public AutorEntity inputParaEntity(AutorInput autorInput) {
 		return modelMapper.map(autorInput, AutorEntity.class);
 	}
 
-	public AutorOutput entityToOutput(AutorEntity autoresEncontrado) {
+	public AutorOutput entityParaOutput(AutorEntity autoresEncontrado) {
 		return modelMapper.map(autoresEncontrado, AutorOutput.class);
 	}
 
@@ -34,13 +34,13 @@ public class AutorConvert {
 		modelMapper.map(autorInput, autorEncontrado);
 	}
 
-	public Page<AutorOutput> ListEntityToListOutput(Page<AutorEntity> autoresEncontrados) {
-		return autoresEncontrados.map(this::entityToOutput);
+	public Page<AutorOutput> pageEntityParaPageOutput(Page<AutorEntity> autoresEncontrados) {
+		return autoresEncontrados.map(this::entityParaOutput);
 	}
 	
-	public List<AutorEntity> longToEntity(List<Long> listLong){
+	public List<AutorEntity> longParaEntity(List<Long> listLong){
 		List<AutorEntity> autores = new ArrayList<>();
-		listLong.forEach(autor -> autores.add(autorService.buscarPeloId(autor)));
+		listLong.forEach(autorId -> autores.add(autorService.buscarPeloId(autorId)));
 		return autores;
 	}
 }

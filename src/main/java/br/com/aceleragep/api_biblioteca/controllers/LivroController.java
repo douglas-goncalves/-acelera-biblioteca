@@ -2,6 +2,8 @@ package br.com.aceleragep.api_biblioteca.controllers;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,18 +33,15 @@ import br.com.aceleragep.api_biblioteca.services.LivroService;
 @RequestMapping(ControllerConfig.PRE_URL + "livros")
 public class LivroController {
 
-	@Autowired
-	LivroService livroService;
-
-	@Autowired
-	LivroConvert livroConvert;
+	@Autowired LivroService livroService;
+	@Autowired LivroConvert livroConvert;
 
 	// FindAll
 	@GetMapping("listar")
 	public Page<LivroOutput> listarTodos(
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 		Page<LivroEntity> livroesEncontrados = livroService.listarTodos(paginacao);
-		return livroConvert.ListEntityToListOutput(livroesEncontrados);
+		return livroConvert.pageEntityParaPageOutput(livroesEncontrados);
 	}
 
 	// FindAllById
@@ -50,13 +49,13 @@ public class LivroController {
 	public LivroOutput buscarPorId(@PathVariable Long livroId) {
 		System.out.println("Buscar");
 		LivroEntity livroesEncontrados = livroService.buscarPeloId(livroId);
-		return livroConvert.entityToOutput(livroesEncontrados);
+		return livroConvert.entityParaOutput(livroesEncontrados);
 	}
 
 	// Post
 	@PostMapping("cadastar")
-	public ResponseEntity<LivroEntity> cadastrar(@RequestBody LivroInput livroInput, UriComponentsBuilder uriBuild) {
-		LivroEntity livroNovo = livroConvert.inputToEntity(livroInput);
+	public ResponseEntity<LivroEntity> cadastrar(@Valid @RequestBody LivroInput livroInput, UriComponentsBuilder uriBuild) {
+		LivroEntity livroNovo = livroConvert.inputParaEntity(livroInput);
 		LivroEntity livroSalvo = livroService.cadastrar(livroNovo);
 
 		URI uri = uriBuild.path(ControllerConfig.PRE_URL + "livros/{id}").buildAndExpand(livroSalvo.getId()).toUri();
@@ -73,10 +72,17 @@ public class LivroController {
 
 	// Put
 	@PutMapping("atualizar/{livroId}")
-	public LivroOutput atualizar(@PathVariable Long livroId, @RequestBody LivroInput livroInput) {
+	public LivroOutput atualizar(@PathVariable Long livroId, @Valid @RequestBody LivroInput livroInput) {
 		LivroEntity livroEncontrado = livroService.buscarPeloId(livroId);
-		livroConvert.copyInputToEntity(livroEncontrado, livroInput);
+		livroConvert.copyInputParaEntity(livroEncontrado, livroInput);
 		LivroEntity livroSalvo = livroService.atualizar(livroEncontrado);
-		return livroConvert.entityToOutput(livroSalvo);
+		return livroConvert.entityParaOutput(livroSalvo);
+	}
+	
+	//Retorna Todos os Livro pelo ID do Autor
+	@GetMapping("listarPeloAutorId/{autorId}")
+	public Page<LivroOutput> listarLivrosPeloIdAutor(@PathVariable Long autorId, Pageable paginacao) {
+		 Page<LivroEntity> livrosAutor = livroService.listarLivrosPeloIdAutor(autorId, paginacao);
+		 return livroConvert.pageEntityParaPageOutput(livrosAutor);
 	}
 }
