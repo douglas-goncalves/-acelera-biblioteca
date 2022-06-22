@@ -25,7 +25,7 @@ public class LivroEntity {
 	@Column(name = "titulo", length = 200, nullable = false)
 	private String titulo;
 	@Column(name = "ano_lancamento", length = 4, nullable = false)
-	private String anoLancamento;
+	private Integer anoLancamento;
 	
 	@ManyToMany
 	@JoinTable(name="tb_livros_autores",

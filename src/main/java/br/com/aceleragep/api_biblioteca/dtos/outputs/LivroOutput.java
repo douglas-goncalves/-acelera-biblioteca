@@ -11,6 +11,6 @@ import lombok.Setter;
 public class LivroOutput {
 	private Long id;
 	private String titulo;
-	private String anoLancamento;
+	private Integer anoLancamento;
 	private List<AutorEntity> autores;
 }

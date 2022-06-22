@@ -47,7 +47,6 @@ public class LivroController {
 	// FindAllById
 	@GetMapping("buscar/{livroId}")
 	public LivroOutput buscarPorId(@PathVariable Long livroId) {
-		System.out.println("Buscar");
 		LivroEntity livroesEncontrados = livroService.buscarPeloId(livroId);
 		return livroConvert.entityParaOutput(livroesEncontrados);
 	}

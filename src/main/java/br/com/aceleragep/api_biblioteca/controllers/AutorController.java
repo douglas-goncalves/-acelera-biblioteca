@@ -50,7 +50,6 @@ public class AutorController {
 	// FindAllById
 	@GetMapping("buscar/{autorId}")
 	public AutorOutput buscarPorId(@PathVariable Long autorId) {
-		System.out.println("Buscar");
 		AutorEntity autoresEncontrados = autorService.buscarPeloId(autorId);
 		return autorConvert.entityParaOutput(autoresEncontrados);
 	}
