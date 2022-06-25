@@ -11,9 +11,7 @@ Este é o primeiro projeto de avaliação do Acelera ao qual o tema é bibliotec
 - Swagger
 - Java 17
 
-# Como Executar o projeto
-
-## Backend
+# Backend
 ### Pré-requisitos:
 - Java JDK 17 ( OpenJDK17 )
 - Framework ( SpringTools ) 
@@ -50,8 +48,8 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
   
  ## Requisições e Objetos Json usadas no Postman:
  
- #### Arquivo Json exportado pelo Postman contendo as requisições:
- [![Json para Importar no Postman](https://github.com/douglas-goncalves/acelera_assets/blob/master/postman.png)](https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json)
+ #### Link do Json exportado pelo Postman contendo as requisições:
+ <https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json>
   
 ### AutorEntity:
 #### Lista todos:
@@ -143,8 +141,8 @@ Para Acessar a documentação será necessario levantar a aplicação e usar o U
 # Modelo Entidade Relacionameto:
 ![mer](https://github.com/douglas-goncalves/acelera_assets/blob/master/mer.png)
 
-### Arquivo sql usado para popular as tabelas para alguns testes:
-[![Sql usado em alguns testes](https://github.com/douglas-goncalves/acelera_assets/blob/master/mysql.png)](https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/popular_tabelas_aceleragep_biblioteca.sql)
+### Link do sql usado para popular as tabelas para alguns testes:
+<https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/popular_tabelas_aceleragep_biblioteca.sql>
 
 
 
