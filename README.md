@@ -1,7 +1,8 @@
 ![Logo](https://github.com/douglas-goncalves/acelera_assets/blob/master/logo.jpeg)
 # Api aceleraGep Biblioteca
+[![shield-mit](https://img.shields.io/badge/license-MIT-green)](https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/LICENCE)
 # Sobre o Projeto
-Este é o primeiro projeto de avalização do Acelera ao qual o tema é biblioteca.
+Este é o primeiro projeto de avaliação do Acelera ao qual o tema é biblioteca.
 
 # Tecnologias Utilizadas
 - Spring boot
@@ -22,9 +23,11 @@ Este é o primeiro projeto de avalização do Acelera ao qual o tema é bibliote
 ```Banch
 git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
 ```
- 2. Abra o Springtool, Eclipse ou outro de sua preferência.
- 3. Import o projeto
+ 2. Abrir o Springtool, Eclipse ou outro de sua preferência.
+ 3. Importar o projeto
  4. Será Necessário Configurar o application.properties do projeto ou definir algumas variáveis de sistema:
+ ![application_properties1](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties.png)
+ 
  #### Host, Porta, Schema, Usuario e Password
   ```Banch
   DATABASE_HOST
@@ -41,7 +44,10 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
   ```Banch
   DATABASE_PASSWORD 
   ```
- ## Requisições:
+   - Um Exemplo para caso resolva não usar as variaveis de sistema
+ ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties_exemplo.png)
+  
+ ## Requisições e Objetos Json usadas no Postman:
  
 ### AutorEntity:
 #### Lista todos:
@@ -103,7 +109,7 @@ http://localhost:8080/api/livros
 {
 	"titulo":"String",
 	"anoLancamento":"Int",
-	"autores":[1,2,3,.,.,.]
+	"autores":[1,2,3,...N]
 }
 ~~~
 Atualiza: 
@@ -114,13 +120,18 @@ http://localhost:8080/api/livros/{idLivro}
 {
 	"titulo":"String",
 	"anoLancamento":"Int",
-	"autores":[1,2,3,.,.,.]
+	"autores":[1,2,3,...N]
 }
 ~~~
 # Swagger
 ### O Swagger esta incorporado ao projeto usando Dependencias (**springdoc-openapi-ui** e **springdoc-openapi-data-rest**) no pom.xml
-Logo após o projeto estive levantado use o link a baixo para acessá-lo.
-<http://localhost:8080/swagger-ui/index.html#/>
+Para Acessar a documentação será necessario levantar a aplicação e usar o URL a baixo para acessá-la.
+
+<a href= "http://localhost:8080/swagger-ui/index.html#/">
+	http://localhost:8080/swagger-ui/index.html#/
+</a>
+
+
 
 # Modelo Entidade Relacionameto:
 ![mer](https://github.com/douglas-goncalves/acelera_assets/blob/master/mer.png)
