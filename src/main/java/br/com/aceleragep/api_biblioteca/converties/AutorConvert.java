@@ -18,7 +18,7 @@ public class AutorConvert {
 
 	@Autowired
 	ModelMapper modelMapper;
-			
+
 	@Autowired
 	AutorService autorService;
 
@@ -37,8 +37,8 @@ public class AutorConvert {
 	public Page<AutorOutput> pageEntityParaPageOutput(Page<AutorEntity> autoresEncontrados) {
 		return autoresEncontrados.map(this::entityParaOutput);
 	}
-	
-	public List<AutorEntity> longParaEntity(List<Long> listLong){
+
+	public List<AutorEntity> longParaEntity(List<Long> listLong) {
 		List<AutorEntity> autores = new ArrayList<>();
 		listLong.forEach(autorId -> autores.add(autorService.buscarPeloId(autorId)));
 		return autores;

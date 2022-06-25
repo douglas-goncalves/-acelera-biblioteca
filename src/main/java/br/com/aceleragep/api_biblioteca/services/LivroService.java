@@ -6,12 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
+import br.com.aceleragep.api_biblioteca.exceptions.NotFoundBussinessException;
 import br.com.aceleragep.api_biblioteca.repositories.LivroRepository;
 
 @Service
 public class LivroService {
 
-	@Autowired LivroRepository livroRepository;
+	@Autowired
+	LivroRepository livroRepository;
 
 	public Page<LivroEntity> listarTodos(Pageable paginacao) {
 		return livroRepository.findAll(paginacao);
@@ -22,7 +24,8 @@ public class LivroService {
 	}
 
 	public LivroEntity buscarPeloId(Long livroId) {
-		return livroRepository.findById(livroId).orElseThrow(() -> new RuntimeException("Livro Não Encontrado"));
+		return livroRepository.findById(livroId)
+				.orElseThrow(() -> new NotFoundBussinessException("Livro Não Encontrado"));
 	}
 
 	public void deletar(LivroEntity livrosEncontrados) {
@@ -36,6 +39,5 @@ public class LivroService {
 	public Page<LivroEntity> listarLivrosPeloIdAutor(Long autorId, Pageable paginacao) {
 		return livroRepository.findAllByAutoresId(autorId, paginacao);
 	}
-
 
 }

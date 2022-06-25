@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
 
-public interface LivroRepository extends JpaRepository<LivroEntity, Long>{
+public interface LivroRepository extends JpaRepository<LivroEntity, Long> {
 	Page<LivroEntity> findAllByAutoresId(Long autorId, Pageable paginacao);
 }

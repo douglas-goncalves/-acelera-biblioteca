@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.aceleragep.api_biblioteca.entities.AutorEntity;
+import br.com.aceleragep.api_biblioteca.exceptions.NotFoundBussinessException;
 import br.com.aceleragep.api_biblioteca.repositories.AutorRepository;
 
 @Service
@@ -23,7 +24,8 @@ public class AutorService {
 	}
 
 	public AutorEntity buscarPeloId(Long autorId) {
-		return autorRepository.findById(autorId).orElseThrow(() -> new RuntimeException("Autor Não Encontrado"));
+		return autorRepository.findById(autorId)
+				.orElseThrow(() -> new NotFoundBussinessException("Autor Não Encontrado"));
 	}
 
 	public void deletar(AutorEntity autoresEncontrados) {

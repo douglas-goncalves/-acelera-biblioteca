@@ -13,9 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="tb_autores")
+@Table(name = "tb_autores")
 public class AutorEntity {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;

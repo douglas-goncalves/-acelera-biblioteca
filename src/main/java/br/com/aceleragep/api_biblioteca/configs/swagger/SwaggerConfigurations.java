@@ -15,28 +15,20 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 public class SwaggerConfigurations {
 	@Bean
 	public GroupedOpenApi aceleraBibliotecaApi() {
-		return  GroupedOpenApi.builder()
-				.group("br.com.aceleragep.api_biblioteca")
-				.pathsToMatch("/**")
-				.build();
+		return GroupedOpenApi.builder().group("br.com.aceleragep.api_biblioteca").pathsToMatch("/**").build();
 	}
-	
-    @Bean
-    public OpenAPI forumAluraOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("AceleraGepBibliotecaApi")
-                                .description("Projeto de Api AceleraGep Biblioteca")
-                                .version("v0.0.1")
-                                .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-                .components(new Components().addSecuritySchemes("bearer-key", new SecurityScheme().type(SecurityScheme.Type.HTTP)
-                                                                                                      .scheme("bearer")
-                                                                                                      .bearerFormat("JWT")))
-                .externalDocs(new ExternalDocumentation()
-                        .description("SpringShop Wiki Documentation")
-                        .url("https://springshop.wiki.github.org/docs"))
-                .components(new Components()
-                        .addSecuritySchemes("bearer-key", new SecurityScheme().type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer").in(SecurityScheme.In.HEADER)
-                                .bearerFormat("JWT")));
-    }
+
+	@Bean
+	public OpenAPI forumAluraOpenAPI() {
+		return new OpenAPI()
+				.info(new Info().title("AceleraGepBibliotecaApi").description("Projeto de Api AceleraGep Biblioteca")
+						.version("v0.0.1").license(new License().name("Apache 2.0").url("http://springdoc.org")))
+				.components(new Components().addSecuritySchemes("bearer-key",
+						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
+				.externalDocs(new ExternalDocumentation().description("SpringShop Wiki Documentation")
+						.url("https://springshop.wiki.github.org/docs"))
+				.components(new Components().addSecuritySchemes("bearer-key",
+						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer")
+								.in(SecurityScheme.In.HEADER).bearerFormat("JWT")));
+	}
 }

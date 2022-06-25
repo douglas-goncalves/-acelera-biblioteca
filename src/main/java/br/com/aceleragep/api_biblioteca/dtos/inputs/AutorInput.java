@@ -10,8 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AutorInput {
-	@NotBlank @Length(min = 1, max = 100)
+	@NotBlank
+	@Length(min = 1, max = 100)
 	private String nome;
-	@NotBlank @Length(min = 1, max = 1000)
+	@NotBlank
+	@Length(min = 1, max = 1000)
 	private String bibliografia;
 }

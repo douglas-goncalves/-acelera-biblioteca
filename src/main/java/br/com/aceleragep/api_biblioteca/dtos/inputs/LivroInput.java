@@ -15,10 +15,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LivroInput {
-	@NotBlank @Length(min = 1, max = 200)
+	@NotBlank
+	@Length(min = 1, max = 200)
 	private String titulo;
+	@NotNull
 	@Max(9999)
 	private Integer anoLancamento;
-	@NotNull @Size(min = 1)
+	@NotNull
+	@Size(min = 1)
 	private List<Long> autores;
 }

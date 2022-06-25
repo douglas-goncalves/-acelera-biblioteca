@@ -27,7 +27,6 @@ import br.com.aceleragep.api_biblioteca.configs.ControllerConfig;
 import br.com.aceleragep.api_biblioteca.converties.LivroConvert;
 import br.com.aceleragep.api_biblioteca.dtos.inputs.LivroInput;
 import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutput;
-import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutputSemAutor;
 import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
 import br.com.aceleragep.api_biblioteca.services.LivroService;
 
@@ -35,13 +34,15 @@ import br.com.aceleragep.api_biblioteca.services.LivroService;
 @RequestMapping(ControllerConfig.PRE_URL + "livros")
 public class LivroController {
 
-	@Autowired LivroService livroService;
-	@Autowired LivroConvert livroConvert;
+	@Autowired
+	LivroService livroService;
+	@Autowired
+	LivroConvert livroConvert;
 
 	// FindAll
 	@GetMapping
-	public Page<LivroOutput> listarTodos(@ParameterObject
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
+	public Page<LivroOutput> listarTodos(
+			@ParameterObject @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 		Page<LivroEntity> livrosEncontrados = livroService.listarTodos(paginacao);
 		return livroConvert.pageEntityParaPageOutput(livrosEncontrados);
 	}
@@ -55,7 +56,8 @@ public class LivroController {
 
 	// Post
 	@PostMapping
-	public ResponseEntity<LivroEntity> cadastrar(@Valid @RequestBody LivroInput livroInput, UriComponentsBuilder uriBuild) {
+	public ResponseEntity<LivroEntity> cadastrar(@Valid @RequestBody LivroInput livroInput,
+			UriComponentsBuilder uriBuild) {
 		LivroEntity livroNovo = livroConvert.inputParaEntity(livroInput);
 		LivroEntity livroSalvo = livroService.cadastrar(livroNovo);
 

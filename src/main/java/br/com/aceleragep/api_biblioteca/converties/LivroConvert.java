@@ -15,7 +15,7 @@ public class LivroConvert {
 
 	@Autowired
 	ModelMapper modelMapper;
-	
+
 	@Autowired
 	AutorConvert autorConvert;
 
@@ -28,7 +28,7 @@ public class LivroConvert {
 	public LivroOutput entityParaOutput(LivroEntity livrosEncontrado) {
 		return modelMapper.map(livrosEncontrado, LivroOutput.class);
 	}
-	
+
 	public LivroOutputSemAutor entityParaOutputSemAutor(LivroEntity livrosEncontrado) {
 		return modelMapper.map(livrosEncontrado, LivroOutputSemAutor.class);
 	}
@@ -38,12 +38,12 @@ public class LivroConvert {
 		livroEncontrado.setAutores(autorConvert.longParaEntity(livroInput.getAutores()));
 	}
 
-	//OutputSemAutor
+	// OutputSemAutor
 	public Page<LivroOutputSemAutor> pageEntityParaPageOutputSemAutor(Page<LivroEntity> livrosEncontrados) {
 		return livrosEncontrados.map(this::entityParaOutputSemAutor);
 	}
-	
-	//Output
+
+	// Output
 	public Page<LivroOutput> pageEntityParaPageOutput(Page<LivroEntity> livrosEncontrados) {
 		return livrosEncontrados.map(this::entityParaOutput);
 	}

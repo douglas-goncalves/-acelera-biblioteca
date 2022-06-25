@@ -38,15 +38,19 @@ import br.com.aceleragep.api_biblioteca.services.LivroService;
 @RequestMapping(ControllerConfig.PRE_URL + "autores")
 public class AutorController {
 
-	@Autowired AutorService autorService;
-	@Autowired AutorConvert autorConvert;
-	@Autowired LivroService livroService;
-	@Autowired LivroConvert livroConvert;
+	@Autowired
+	AutorService autorService;
+	@Autowired
+	AutorConvert autorConvert;
+	@Autowired
+	LivroService livroService;
+	@Autowired
+	LivroConvert livroConvert;
 
 	// FindAll
 	@GetMapping
-	public Page<AutorOutput> listarTodos(@ParameterObject
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
+	public Page<AutorOutput> listarTodos(
+			@ParameterObject @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 		Page<AutorEntity> autoresEncontrados = autorService.listarTodos(paginacao);
 		return autorConvert.pageEntityParaPageOutput(autoresEncontrados);
 	}
@@ -60,7 +64,8 @@ public class AutorController {
 
 	// Post
 	@PostMapping
-	public ResponseEntity<AutorEntity> cadastrar(@Valid @RequestBody AutorInput autorInput, UriComponentsBuilder uriBuild) {
+	public ResponseEntity<AutorEntity> cadastrar(@Valid @RequestBody AutorInput autorInput,
+			UriComponentsBuilder uriBuild) {
 		AutorEntity autorNovo = autorConvert.inputParaEntity(autorInput);
 		AutorEntity autorSalvo = autorService.cadastrar(autorNovo);
 
@@ -84,14 +89,14 @@ public class AutorController {
 		AutorEntity autorSalvo = autorService.atualizar(autorEncontrado);
 		return autorConvert.entityParaOutput(autorSalvo);
 	}
-	
-	//Retorna Todos os Livro pelo ID do Autor
+
+	// Retorna Todos os Livro pelo ID do Autor
 	@GetMapping("/{autorId}/livros")
-	public Page<LivroOutputSemAutor> listarLivrosPeloIdAutor(@PathVariable Long autorId, @ParameterObject
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
-		
-		 Page<LivroEntity> livrosAutor = livroService.listarLivrosPeloIdAutor(autorId, paginacao);
-		 
-		 return livroConvert.pageEntityParaPageOutputSemAutor(livrosAutor);
+	public Page<LivroOutputSemAutor> listarLivrosPeloIdAutor(@PathVariable Long autorId,
+			@ParameterObject @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
+
+		autorService.buscarPeloId(autorId);
+		Page<LivroEntity> livrosAutor = livroService.listarLivrosPeloIdAutor(autorId, paginacao);
+		return livroConvert.pageEntityParaPageOutputSemAutor(livrosAutor);
 	}
 }
