@@ -103,7 +103,7 @@ http://localhost:8080/api/livros
 {
 	"titulo":"String",
 	"anoLancamento":"Int",
-	"autores":[1,2,3,.]
+	"autores":[1,2,3,.,.,.]
 }
 ~~~
 Atualiza: 
@@ -114,7 +114,7 @@ http://localhost:8080/api/livros/{idLivro}
 {
 	"titulo":"String",
 	"anoLancamento":"Int",
-	"autores":[1,2,3,.]
+	"autores":[1,2,3,.,.,.]
 }
 ~~~
 # Swagger
