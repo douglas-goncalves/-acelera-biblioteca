@@ -14,8 +14,9 @@ Este é o primeiro projeto de avaliação do Acelera ao qual o tema é bibliotec
 # Como Executar o projeto
 
 ## Backend
-# Pré-requisitos:
-- Java 17
+### Pré-requisitos:
+- Java JDK 17 ( OpenJDK17 )
+- Framework ( SpringTools ) 
 
 # Como importar e levantar o projeto
 
@@ -23,12 +24,12 @@ Este é o primeiro projeto de avaliação do Acelera ao qual o tema é bibliotec
 ```Banch
 git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
 ```
- 2. Abrir o Springtool, Eclipse ou outro de sua preferência.
- 3. Importar o projeto
+ 2. Abrir o SpringTools, Eclipse ou outro de sua preferência e que tenha suporte.
+ 3. Importar o projeto.
  4. Será Necessário Configurar o application.properties do projeto ou definir algumas variáveis de sistema:
  ![application_properties1](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties.png)
  
- #### Host, Porta, Schema, Usuario e Password
+ #### Host, Port, Schema, User e Password
   ```Banch
   DATABASE_HOST
   ```
@@ -48,7 +49,9 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
  ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties_exemplo.png)
   
  ## Requisições e Objetos Json usadas no Postman:
- 
+ #### Link do arquivo Json com toda as requisições e que pode ser importado pelo Postman:
+ - <https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json>
+  
 ### AutorEntity:
 #### Lista todos:
  ```Banch
@@ -66,6 +69,7 @@ Cadastra:
  ```Banch
 http://localhost:8080/api/autores
 ```
+- Corpo da requisição:
 ~~~json
 {
 	"nome":"String",
@@ -77,6 +81,7 @@ Atualiza:
  ```Banch
 http://localhost:8080/api/autores/{idAutor}
 ```
+- Corpo da requisição:
 ~~~json
 {
 	"nome":"String",
@@ -105,6 +110,7 @@ Cadastra:
  ```Banch
 http://localhost:8080/api/livros
 ```
+- Corpo da requisição:
 ~~~json
 {
 	"titulo":"String",
@@ -116,6 +122,7 @@ Atualiza:
  ```Banch
 http://localhost:8080/api/livros/{idLivro}
 ```
+- Corpo da requisição:
 ~~~json
 {
 	"titulo":"String",
@@ -126,10 +133,9 @@ http://localhost:8080/api/livros/{idLivro}
 # Swagger
 ### O Swagger esta incorporado ao projeto usando Dependencias (**springdoc-openapi-ui** e **springdoc-openapi-data-rest**) no pom.xml
 Para Acessar a documentação será necessario levantar a aplicação e usar o URL a baixo para acessá-la.
+- <http://localhost:8080/swagger-ui/index.html#/>
+#### Obs: O link poderá variar um pouco de PC para PC dependendo das configurações, um exemplo é que a porta usada neste caso é 8080 e em outros casos poderá não ser a  mesma.
 
-<a href= "http://localhost:8080/swagger-ui/index.html#/">
-	http://localhost:8080/swagger-ui/index.html#/
-</a>
 
 
 
