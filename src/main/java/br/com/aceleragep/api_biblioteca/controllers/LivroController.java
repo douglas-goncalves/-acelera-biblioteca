@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import br.com.aceleragep.api_biblioteca.configs.ControllerConfig;
 import br.com.aceleragep.api_biblioteca.converties.LivroConvert;
 import br.com.aceleragep.api_biblioteca.dtos.inputs.LivroInput;
 import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutput;
+import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutputSemAutor;
 import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
 import br.com.aceleragep.api_biblioteca.services.LivroService;
 
@@ -37,22 +39,22 @@ public class LivroController {
 	@Autowired LivroConvert livroConvert;
 
 	// FindAll
-	@GetMapping("listar")
-	public Page<LivroOutput> listarTodos(
+	@GetMapping
+	public Page<LivroOutput> listarTodos(@ParameterObject
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
-		Page<LivroEntity> livroesEncontrados = livroService.listarTodos(paginacao);
-		return livroConvert.pageEntityParaPageOutput(livroesEncontrados);
+		Page<LivroEntity> livrosEncontrados = livroService.listarTodos(paginacao);
+		return livroConvert.pageEntityParaPageOutput(livrosEncontrados);
 	}
 
-	// FindAllById
-	@GetMapping("buscar/{livroId}")
+	// FindById
+	@GetMapping("/{livroId}")
 	public LivroOutput buscarPorId(@PathVariable Long livroId) {
-		LivroEntity livroesEncontrados = livroService.buscarPeloId(livroId);
-		return livroConvert.entityParaOutput(livroesEncontrados);
+		LivroEntity livroEncontrado = livroService.buscarPeloId(livroId);
+		return livroConvert.entityParaOutput(livroEncontrado);
 	}
 
 	// Post
-	@PostMapping("cadastar")
+	@PostMapping
 	public ResponseEntity<LivroEntity> cadastrar(@Valid @RequestBody LivroInput livroInput, UriComponentsBuilder uriBuild) {
 		LivroEntity livroNovo = livroConvert.inputParaEntity(livroInput);
 		LivroEntity livroSalvo = livroService.cadastrar(livroNovo);
@@ -63,25 +65,18 @@ public class LivroController {
 
 	// Delete
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@DeleteMapping("deletar/{livroId}")
+	@DeleteMapping("/{livroId}")
 	public void deletar(@PathVariable Long livroId) {
-		LivroEntity livroesEncontrados = livroService.buscarPeloId(livroId);
-		livroService.deletar(livroesEncontrados);
+		LivroEntity livroEncontrado = livroService.buscarPeloId(livroId);
+		livroService.deletar(livroEncontrado);
 	}
 
 	// Put
-	@PutMapping("atualizar/{livroId}")
+	@PutMapping("/{livroId}")
 	public LivroOutput atualizar(@PathVariable Long livroId, @Valid @RequestBody LivroInput livroInput) {
 		LivroEntity livroEncontrado = livroService.buscarPeloId(livroId);
 		livroConvert.copyInputParaEntity(livroEncontrado, livroInput);
 		LivroEntity livroSalvo = livroService.atualizar(livroEncontrado);
 		return livroConvert.entityParaOutput(livroSalvo);
-	}
-	
-	//Retorna Todos os Livro pelo ID do Autor
-	@GetMapping("listarPeloAutorId/{autorId}")
-	public Page<LivroOutput> listarLivrosPeloIdAutor(@PathVariable Long autorId, Pageable paginacao) {
-		 Page<LivroEntity> livrosAutor = livroService.listarLivrosPeloIdAutor(autorId, paginacao);
-		 return livroConvert.pageEntityParaPageOutput(livrosAutor);
 	}
 }

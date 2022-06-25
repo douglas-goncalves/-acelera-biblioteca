@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,38 +25,41 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.aceleragep.api_biblioteca.configs.ControllerConfig;
 import br.com.aceleragep.api_biblioteca.converties.AutorConvert;
+import br.com.aceleragep.api_biblioteca.converties.LivroConvert;
 import br.com.aceleragep.api_biblioteca.dtos.inputs.AutorInput;
 import br.com.aceleragep.api_biblioteca.dtos.outputs.AutorOutput;
+import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutputSemAutor;
 import br.com.aceleragep.api_biblioteca.entities.AutorEntity;
+import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
 import br.com.aceleragep.api_biblioteca.services.AutorService;
+import br.com.aceleragep.api_biblioteca.services.LivroService;
 
 @RestController
 @RequestMapping(ControllerConfig.PRE_URL + "autores")
 public class AutorController {
 
-	@Autowired
-	AutorService autorService;
-
-	@Autowired
-	AutorConvert autorConvert;
+	@Autowired AutorService autorService;
+	@Autowired AutorConvert autorConvert;
+	@Autowired LivroService livroService;
+	@Autowired LivroConvert livroConvert;
 
 	// FindAll
-	@GetMapping("listar")
-	public Page<AutorOutput> listarTodos(
+	@GetMapping
+	public Page<AutorOutput> listarTodos(@ParameterObject
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 		Page<AutorEntity> autoresEncontrados = autorService.listarTodos(paginacao);
 		return autorConvert.pageEntityParaPageOutput(autoresEncontrados);
 	}
 
 	// FindAllById
-	@GetMapping("buscar/{autorId}")
+	@GetMapping("/{autorId}")
 	public AutorOutput buscarPorId(@PathVariable Long autorId) {
 		AutorEntity autoresEncontrados = autorService.buscarPeloId(autorId);
 		return autorConvert.entityParaOutput(autoresEncontrados);
 	}
 
 	// Post
-	@PostMapping("cadastar")
+	@PostMapping
 	public ResponseEntity<AutorEntity> cadastrar(@Valid @RequestBody AutorInput autorInput, UriComponentsBuilder uriBuild) {
 		AutorEntity autorNovo = autorConvert.inputParaEntity(autorInput);
 		AutorEntity autorSalvo = autorService.cadastrar(autorNovo);
@@ -66,18 +70,28 @@ public class AutorController {
 
 	// Delete
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@DeleteMapping("deletar/{autorId}")
+	@DeleteMapping("/{autorId}")
 	public void deletar(@PathVariable Long autorId) {
 		AutorEntity autoresEncontrados = autorService.buscarPeloId(autorId);
 		autorService.deletar(autoresEncontrados);
 	}
 
 	// Put
-	@PutMapping("atualizar/{autorId}")
+	@PutMapping("/{autorId}")
 	public AutorOutput atualizar(@PathVariable Long autorId, @Valid @RequestBody AutorInput autorInput) {
 		AutorEntity autorEncontrado = autorService.buscarPeloId(autorId);
 		autorConvert.copyInputToEntity(autorEncontrado, autorInput);
 		AutorEntity autorSalvo = autorService.atualizar(autorEncontrado);
 		return autorConvert.entityParaOutput(autorSalvo);
+	}
+	
+	//Retorna Todos os Livro pelo ID do Autor
+	@GetMapping("/{autorId}/livros")
+	public Page<LivroOutputSemAutor> listarLivrosPeloIdAutor(@PathVariable Long autorId, @ParameterObject
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
+		
+		 Page<LivroEntity> livrosAutor = livroService.listarLivrosPeloIdAutor(autorId, paginacao);
+		 
+		 return livroConvert.pageEntityParaPageOutputSemAutor(livrosAutor);
 	}
 }

@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,8 @@ public class LivroEntity {
 	private Long id;
 	@Column(name = "titulo", length = 200, nullable = false)
 	private String titulo;
-	@Column(name = "ano_lancamento", length = 4, nullable = false)
+	
+	@Column(name = "ano_lancamento", nullable = false, columnDefinition = "int(4)")
 	private Integer anoLancamento;
 	
 	@ManyToMany
