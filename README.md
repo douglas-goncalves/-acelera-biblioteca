@@ -49,8 +49,8 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
  ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties_exemplo.png)
   
  ## Requisições e Objetos Json usadas no Postman:
- #### Link do arquivo Json com toda as requisições e que pode ser importado pelo Postman:
- - <https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json>
+ #### Arquivo Json com toda as requisições que podem ser importado pelo Postman:
+ [![Json para Importar no Postman](https://github.com/douglas-goncalves/acelera_assets/blob/master/postman.png)](https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json)
   
 ### AutorEntity:
 #### Lista todos:
@@ -141,6 +141,9 @@ Para Acessar a documentação será necessario levantar a aplicação e usar o U
 
 # Modelo Entidade Relacionameto:
 ![mer](https://github.com/douglas-goncalves/acelera_assets/blob/master/mer.png)
+
+### Arqvivo sql usado para popular as tabelas para alguns testes:
+[![Sql usado em alguns testes](https://github.com/douglas-goncalves/acelera_assets/blob/master/mysql.png)](https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/popular_tabelas_aceleragep_biblioteca.sql)
 
 
 
