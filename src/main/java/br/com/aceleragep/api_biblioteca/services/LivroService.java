@@ -24,8 +24,8 @@ public class LivroService {
 	}
 
 	public LivroEntity buscarPeloId(Long livroId) {
-		return livroRepository.findById(livroId)
-				.orElseThrow(() -> new NotFoundBussinessException("Livro Não Encontrado"));
+		return livroRepository.findById(livroId).orElseThrow(
+				() -> new NotFoundBussinessException(String.format("O livro de id %s não foi encontrado", livroId)));
 	}
 
 	public void deletar(LivroEntity livrosEncontrados) {

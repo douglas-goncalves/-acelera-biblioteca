@@ -24,12 +24,8 @@ public class AutorService {
 	}
 
 	public AutorEntity buscarPeloId(Long autorId) {
-		return autorRepository.findById(autorId)
-				.orElseThrow(() -> new NotFoundBussinessException("Autor Não Encontrado"));
-	}
-
-	public void deletar(AutorEntity autoresEncontrados) {
-		autorRepository.delete(autoresEncontrados);
+		return autorRepository.findById(autorId).orElseThrow(
+				() -> new NotFoundBussinessException(String.format("O autor de id %s não foi encontrado", autorId)));
 	}
 
 	public AutorEntity atualizar(AutorEntity autorEncontrado) {

@@ -1,6 +1,5 @@
 package br.com.aceleragep.api_biblioteca.converties;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -26,8 +25,8 @@ public class AutorConvert {
 		return modelMapper.map(autorInput, AutorEntity.class);
 	}
 
-	public AutorOutput entityParaOutput(AutorEntity autoresEncontrado) {
-		return modelMapper.map(autoresEncontrado, AutorOutput.class);
+	public AutorOutput entityParaOutput(AutorEntity autoreEncontrado) {
+		return modelMapper.map(autoreEncontrado, AutorOutput.class);
 	}
 
 	public void copyInputToEntity(AutorEntity autorEncontrado, AutorInput autorInput) {
@@ -39,8 +38,6 @@ public class AutorConvert {
 	}
 
 	public List<AutorEntity> longParaEntity(List<Long> listLong) {
-		List<AutorEntity> autores = new ArrayList<>();
-		listLong.forEach(autorId -> autores.add(autorService.buscarPeloId(autorId)));
-		return autores;
+		return listLong.stream().map(autorService::buscarPeloId).toList();
 	}
 }
