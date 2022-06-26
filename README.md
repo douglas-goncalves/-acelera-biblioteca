@@ -59,19 +59,19 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
  <https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/AceleraGepBiblioteca.postman_collection.json>
   
 ### AutorEntity:
-#### Lista todos:
+#### Lista todos: GET
  ```Banch
 http://localhost:8080/api/autores?page=0&size=10&sort=id,asc
 ```
-Busca pelo id:
+Busca pelo id: GET
  ```Banch
 http://localhost:8080/api/autores/{idAutor}
 ```
-Deleta: 
+Deleta: DELETE
  ```Banch
 http://localhost:8080/api/autores/{idAutor}
 ```
-Cadastra:
+Cadastra: POST
  ```Banch
 http://localhost:8080/api/autores
 ```
@@ -83,7 +83,7 @@ http://localhost:8080/api/autores
 }
 ~~~
 
-Atualiza:
+Atualiza: PUT
  ```Banch
 http://localhost:8080/api/autores/{idAutor}
 ```
@@ -95,28 +95,28 @@ http://localhost:8080/api/autores/{idAutor}
 }
 ~~~
 
-Lista os Livro pelo id do autor:
+Lista os Livro pelo id do autor: GET
  ```Banch
 http://localhost:8080/api/autores/{idAutor}/livros?page=0&size=10&sort=id,asc
 ```
 ### LivroEntity:
-#### Lista todos: 
+#### Lista todos: GET
  ```Banch
 http://localhost:8080/api/livros?page=0&size=10&sort=id,asc
 ```
-Busca pelo id: 
+Busca pelo id: GET
  ```Banch
 http://localhost:8080/api/livros/{idLivro}
 ```
-Deleta: 
+Deleta: DELETE
  ```Banch
 http://localhost:8080/api/livros/{idLivro}
 ```
-Cadastra: 
+Cadastra: POST
  ```Banch
 http://localhost:8080/api/livros
 ```
-- Corpo da requisição:
+- Corpo da requisição: 
 ~~~json
 {
 	"titulo":"String",
@@ -124,7 +124,7 @@ http://localhost:8080/api/livros
 	"autores":[1,2,3,...N]
 }
 ~~~
-Atualiza: 
+Atualiza: PUT
  ```Banch
 http://localhost:8080/api/livros/{idLivro}
 ```
@@ -150,7 +150,6 @@ Para Acessar a documentação será necessario levantar a aplicação e usar o U
 
 ### Link do sql usado para popular as tabelas para alguns testes:
 <https://github.com/douglas-goncalves/acelera_assets/blob/master/docs/popular_tabelas_aceleragep_biblioteca.sql>
-
 
 
 # Auto
