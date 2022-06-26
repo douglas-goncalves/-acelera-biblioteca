@@ -51,7 +51,7 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
   ```
 
    - Um Exemplo para caso resolva não usar as variaveis de sistema
- ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties_exemplo.png)
+ ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-desenv-properties_exemplo.png)
   
  ## Requisições e Objetos Json usadas no Postman:
  
