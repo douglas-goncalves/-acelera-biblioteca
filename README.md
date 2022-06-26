@@ -22,12 +22,18 @@ Este é o primeiro projeto de avaliação do Acelera ao qual o tema é bibliotec
 ```Banch
 git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
 ```
- 2. Abrir o SpringTools, Eclipse ou outro de sua preferência e que tenha suporte.
+ 2. Abrir o SpringTools ou Eclipse.
  3. Importar o projeto.
- 4. Será Necessário Configurar o application.properties do projeto ou definir algumas variáveis de sistema:
- ![application_properties1](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties.png)
+ 4. Será Necessário configurar algumas variáveis de sistema: 
  
- #### Host, Port, Schema, User e Password
+ 
+ ### application.properties
+ ![application_properties1](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties.png)
+  ```Banch
+  AMBIENTE
+  ```
+ ### application-desenv.properties e application-prod.properties 
+ ![application_properties1](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-desenv-properties.png)
   ```Banch
   DATABASE_HOST
   ```
@@ -43,6 +49,7 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
   ```Banch
   DATABASE_PASSWORD 
   ```
+
    - Um Exemplo para caso resolva não usar as variaveis de sistema
  ![application_properties2](https://github.com/douglas-goncalves/acelera_assets/blob/master/application-properties_exemplo.png)
   
