@@ -24,7 +24,9 @@ git clone https://github.com/douglas-goncalves/api-acelera-biblioteca.git
 ```
  2. Abrir o SpringTools ou Eclipse.
  3. Importar o projeto.
- 4. Será Necessário configurar algumas variáveis de sistema: 
+ 4. Este projeto usa a dependêcia Lombok, então será necesario configurar o Lombok em seu framework.
+    <https://projectlombok.org/setup/eclipse>
+ 6. Será Necessário configurar algumas variáveis de sistema: 
  
  
  ### application.properties
