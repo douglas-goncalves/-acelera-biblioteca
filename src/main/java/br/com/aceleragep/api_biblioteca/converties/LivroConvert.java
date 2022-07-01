@@ -25,12 +25,12 @@ public class LivroConvert {
 		return livroEntity;
 	}
 
-	public LivroOutput entityParaOutput(LivroEntity livrosEncontrado) {
-		return modelMapper.map(livrosEncontrado, LivroOutput.class);
+	public LivroOutput entityParaOutput(LivroEntity livroEncontrado) {
+		return modelMapper.map(livroEncontrado, LivroOutput.class);
 	}
 
-	public LivroOutputSemAutor entityParaOutputSemAutor(LivroEntity livrosEncontrado) {
-		return modelMapper.map(livrosEncontrado, LivroOutputSemAutor.class);
+	public LivroOutputSemAutor entityParaOutputSemAutor(LivroEntity livroEncontrado) {
+		return modelMapper.map(livroEncontrado, LivroOutputSemAutor.class);
 	}
 
 	public void copyInputParaEntity(LivroEntity livroEncontrado, LivroInput livroInput) {

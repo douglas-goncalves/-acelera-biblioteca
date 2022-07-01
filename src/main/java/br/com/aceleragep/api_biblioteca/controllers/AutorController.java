@@ -36,13 +36,13 @@ import br.com.aceleragep.api_biblioteca.services.LivroService;
 public class AutorController {
 
 	@Autowired
-	AutorService autorService;
+	private AutorService autorService;
 	@Autowired
-	AutorConvert autorConvert;
+	private AutorConvert autorConvert;
 	@Autowired
-	LivroService livroService;
+	private LivroService livroService;
 	@Autowired
-	LivroConvert livroConvert;
+	private LivroConvert livroConvert;
 
 	// FindAll
 	@GetMapping
@@ -61,13 +61,14 @@ public class AutorController {
 
 	// Post
 	@PostMapping
-	public ResponseEntity<AutorEntity> cadastrar(@Valid @RequestBody AutorInput autorInput,
+	public ResponseEntity<AutorOutput> cadastrar(@Valid @RequestBody AutorInput autorInput,
 			UriComponentsBuilder uriBuild) {
 		AutorEntity autorNovo = autorConvert.inputParaEntity(autorInput);
 		AutorEntity autorSalvo = autorService.cadastrar(autorNovo);
+		AutorOutput autorOutput = autorConvert.entityParaOutput(autorSalvo);
 
 		URI uri = uriBuild.path(ControllerConfig.PRE_URL + "autores/{id}").buildAndExpand(autorSalvo.getId()).toUri();
-		return ResponseEntity.created(uri).body(autorSalvo);
+		return ResponseEntity.created(uri).body(autorOutput);
 	}
 
 	// Put
