@@ -25,7 +25,7 @@ import br.com.aceleragep.api_biblioteca.converties.AutorConvert;
 import br.com.aceleragep.api_biblioteca.converties.LivroConvert;
 import br.com.aceleragep.api_biblioteca.dtos.inputs.AutorInput;
 import br.com.aceleragep.api_biblioteca.dtos.outputs.AutorOutput;
-import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroOutputSemAutor;
+import br.com.aceleragep.api_biblioteca.dtos.outputs.LivroSemAutorOutput;
 import br.com.aceleragep.api_biblioteca.entities.AutorEntity;
 import br.com.aceleragep.api_biblioteca.entities.LivroEntity;
 import br.com.aceleragep.api_biblioteca.services.AutorService;
@@ -82,7 +82,7 @@ public class AutorController {
 
 	// Retorna Todos os Livro pelo ID do Autor
 	@GetMapping("/{autorId}/livros")
-	public Page<LivroOutputSemAutor> listarLivrosPeloIdAutor(@PathVariable Long autorId,
+	public Page<LivroSemAutorOutput> listarLivrosPeloIdAutor(@PathVariable Long autorId,
 			@ParameterObject @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable paginacao) {
 
 		autorService.buscarPeloId(autorId);

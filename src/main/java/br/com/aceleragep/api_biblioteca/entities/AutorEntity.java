@@ -20,6 +20,6 @@ public class AutorEntity {
 	private Long id;
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
-	@Column(name = "bibliografia", length = 1000, nullable = false)
-	private String bibliografia;
+	@Column(name = "biografia", length = 1000, nullable = false)
+	private String biografia;
 }
